@@ -1,0 +1,23 @@
+def wmape(actual, forecast):
+    """
+    Calculates the Weighted Mean Absolute Percentage Error (WMAPE).
+    
+    Parameters:
+    actual (array-like): Array of actual sales values.
+    forecast (array-like): Array of forecasted sales values.
+    
+    Returns:
+    float: WMAPE value.
+    """
+    weights = actual.replace(0, 1)  # Replace zeros with ones to avoid division by zero
+    absolute_percentage_errors = abs((actual - forecast) / weights)
+    wmape = sum(absolute_percentage_errors) / sum(weights)
+    return wmape * 100  # Convert to percentage
+
+# Assuming you have actual sales values and forecasted sales values
+actual_sales = y_test  # Actual sales values
+forecasted_sales = predictions  # Forecasted sales values
+
+# Calculate WMAPE
+wmape_value = wmape(actual_sales, forecasted_sales)
+print(f"Weighted Mean Absolute Percentage Error (WMAPE): {wmape_value:.2f}%")
